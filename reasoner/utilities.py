@@ -119,7 +119,7 @@ class Adaptor:
         Returns:
             np.ndarray: weights vector of arguments.
         """
-        weights = self._arguments["coherence"].to_numpy(dtype=float)
+        weights = self._arguments[self.weight_col].to_numpy(dtype=float)
         return deepcopy(weights)
 
     def get_parent_vectors(self) -> np.ndarray:
