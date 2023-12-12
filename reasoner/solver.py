@@ -2,8 +2,8 @@
 
 from typing import Type, TypeVar, Union
 import numpy as np
-from orangearg.argument.reasoner.models import Model
-from orangearg.argument.reasoner.utilities import Collector
+from reasoner.models import Model
+from reasoner.utilities import Collector
 
 MODEL = TypeVar("MODEL", bound=Model)
 

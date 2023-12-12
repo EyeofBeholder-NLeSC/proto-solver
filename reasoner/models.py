@@ -3,9 +3,9 @@
 from abc import ABC, abstractmethod
 from copy import deepcopy
 import numpy as np
-from orangearg.argument.reasoner.utilities import Adaptor
-from orangearg.argument.reasoner.aggregation_funcs import summate, product
-from orangearg.argument.reasoner.influence_funcs import pmax, euler, linear
+from reasoner.utilities import Adaptor
+from reasoner.aggregation_funcs import summate, product
+from reasoner.influence_funcs import pmax, euler, linear
 
 
 class Model(ABC):
