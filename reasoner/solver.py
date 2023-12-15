@@ -23,7 +23,7 @@ class Solver:
         self.epsilon = epsilon
 
     def solve(
-        self, solver: str, collect_data: bool = False
+        self, solver: str, collect_data: bool = False, update_last: int = 0
     ) -> tuple[int, Union[Collector, None]]:
         """Solve the reasoner graph by a selected algorithm.
 
@@ -54,7 +54,7 @@ class Solver:
         )
 
         for step in range(int(self.max_steps)):
-            delta = app_func()
+            delta = app_func(update_last=update_last)
             self.model.update(delta=delta)
 
             # pylint: disable=expression-not-assigned
@@ -64,21 +64,26 @@ class Solver:
 
         return step, data_collector
 
-    def _rk4(self) -> np.ndarray:
+    def _rk4(self, update_last: int = 0) -> np.ndarray:
         """The forth-order Runge-Kutta algorithm.
 
         Returns:
             np.ndarray: The derivate at the current strength vector.
         """
         strength_vector = self.model.strength_vector
-        k1 = self.model.compute_delta(strength_vector=strength_vector)
+        k1 = self.model.compute_delta(
+            strength_vector=strength_vector, update_last=update_last
+        )
         k2 = self.model.compute_delta(
-            strength_vector=strength_vector + 0.5 * self.step_size * k1
+            strength_vector=strength_vector + 0.5 * self.step_size * k1,
+            update_last=update_last,
         )
         k3 = self.model.compute_delta(
-            strength_vector=strength_vector + 0.5 * self.step_size * k2
+            strength_vector=strength_vector + 0.5 * self.step_size * k2,
+            update_last=update_last,
         )
         k4 = self.model.compute_delta(
-            strength_vector=strength_vector + self.step_size * k3
+            strength_vector=strength_vector + self.step_size * k3,
+            update_last=update_last,
         )
         return self.step_size * (k1 + 2 * k2 + 2 * k3 + k4) / 6

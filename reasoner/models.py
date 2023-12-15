@@ -76,17 +76,24 @@ class Model(ABC):
             weight (float): Argument weight.
         """
 
-    def compute_delta(self, strength_vector: np.ndarray):
+    def compute_delta(self, strength_vector: np.ndarray, update_last: int = 0):
         """Compute derivate of strength vector at given point.
 
         Args:
             strength_vector (np.ndarray): Strength vector.
+            update_last (int): The index of the row of parent vector to start iteration. In a future version of the module, there will be a function to indicate which nodes should be updated.
 
         Returns:
             _type_: Derivate of strength vector.
         """
-        new_strengths = []
-        for i in range(self._parent_vectors.shape[0]):
+        if update_last == 0:
+            new_strengths = []
+            until = self._parent_vectors.shape[0]
+        else:
+            new_strengths = self._strength_vector[0:-update_last].tolist()
+            until = 0
+
+        for i in range(-update_last, until):
             agg_strength = self.aggregation(
                 parent_vector=self._parent_vectors[i], strength_vector=strength_vector
             )
