@@ -2,11 +2,12 @@
 A prototype of applying the solver to QBAF that contains support links and nodes of topics and products in a single graph.
 
 ## Installation and usage
-1. Clone the repo to anywhere on your local machine
+1. Clone the repo to anywhere on your local machine and navigate to the work folder.
 ```
 git clone https://github.com/EyeofBeholder-NLeSC/proto-solver.git
+cd proto-solver
 ```
-2. We recommend to create a new virtual environment and install everything there. To do that and activate it:
+2. We highly recommend creating a new virtual environment and installing everything there. To do that and activate it:
 ```
 python -m venv venv
 source ./venv/bin/activate
@@ -15,7 +16,7 @@ source ./venv/bin/activate
 ```
 pip install -r requirements
 ```
-4. Start jupyter and run the notebook in your web browser:
+4. Start Jupyter server and run the notebook in your web browser:
 ```
 jupyter notebook
 ```
